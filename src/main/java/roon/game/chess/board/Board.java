@@ -17,10 +17,11 @@ public class Board {
     private Player whitePlayer;
     private Player blackPlayer;
 
-    public Board() {
+    public Board(Player whitePlayer, Player blackPlayer) {
         board = new AbstractPiece[SIZE][SIZE];
-        this.whitePlayer = new Player(PieceColor.WHITE);
-        this.blackPlayer = new Player(PieceColor.BLACK);
+
+        this.whitePlayer = whitePlayer;
+        this.blackPlayer = blackPlayer;
     }
 
     private void writeBoard() {

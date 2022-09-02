@@ -16,7 +16,7 @@ public class King extends AbstractPiece{
 
     @Override
     public String toString(){
-        var ret = this.getClass().getSimpleName()+" "+file+rank;
+        var ret = pieceColor.name() +" "+ this.symbol.name();
         return decoratePrint(ret);
     }
 }

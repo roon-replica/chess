@@ -3,6 +3,7 @@ package roon.game.chess.demo;
 import roon.game.chess.Command;
 import roon.game.chess.board.Board;
 import roon.game.chess.board.PieceColor;
+import roon.game.chess.board.Player;
 import roon.game.chess.pieces.Queen;
 
 public class Demo {
@@ -12,8 +13,12 @@ public class Demo {
 //        queen.move(command.getFile(), command.getRank());
 //        System.out.println(queen.getFile()+" "+queen.getRank());
 
-        var board = new Board();
+        var whitePlayer = new Player(PieceColor.WHITE);
+        var blackPlayer = new Player(PieceColor.BLACK);
+
+        var board = new Board(whitePlayer, blackPlayer);
         board.printBoard();
+
 
     }
 }

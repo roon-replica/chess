@@ -13,7 +13,7 @@ public class Empty extends AbstractPiece {
 
     @Override
     public String toString() {
-        var ret = this.getClass().getSimpleName()+" "+file+rank;
+        var ret = this.getClass().getSimpleName();
         return decoratePrint(ret);
     }
 }
