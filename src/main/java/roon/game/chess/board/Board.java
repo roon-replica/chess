@@ -50,7 +50,7 @@ public class Board {
 
     public void printBoard() {
         writeBoard();
-        for (int r = 0; r < SIZE; r++) {
+        for (int r = SIZE-1; r>=0; r--) {
             for (int c = 0; c < SIZE; c++) {
                 System.out.print(board[r][c] + " ");
             }

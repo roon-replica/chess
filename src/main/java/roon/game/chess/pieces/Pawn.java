@@ -24,9 +24,9 @@ public class Pawn extends AbstractPiece{
     }
 
     @Override
-    public void move(char nextFile, char nextRank, Board board) {
-        boolean canmove = this.validate(nextFile, nextRank, board); //todo:  this필요?
-        if(canmove == false){
+    public void move(char prevFile, char prevRank, char nextFile, char nextRank, Board board) {
+        boolean canmove = this.validate(prevFile, prevRank, nextFile, nextRank, board);
+        if (canmove == false) {
             System.out.println("can not move");
             return;
         }
@@ -36,8 +36,8 @@ public class Pawn extends AbstractPiece{
     }
 
     @Override
-    protected boolean validate(char nextFile, char nextRank, Board board) {
-        if (board.isEmpty(nextFile, nextRank) == false) {
+    protected boolean validate(char prevFile, char prevRank, char nextFile, char nextRank, Board board) {
+        if (board.isEmpty(prevFile, prevRank) || board.isEmpty(nextFile, nextRank) == false) {
             return false;
         }
 

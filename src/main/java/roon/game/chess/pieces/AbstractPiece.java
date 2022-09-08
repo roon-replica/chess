@@ -14,24 +14,24 @@ public abstract class AbstractPiece {
 
     int score;  // 기물 점수
 
-    public void move(char file, char rank, Board board) {
+    public void move(char prevFile, char prevRank, char nextFile, char nextRank, Board board) {
         //validate(file, rank, board);
-        boolean canmove = this.validate(file, rank, board);
+        boolean canmove = this.validate(prevFile, prevRank, nextFile, nextRank, board);
 
-        if(canmove == false){
+        if (canmove == false) {
             System.out.println("can not move");
             return;
         }
 
-        this.file = file;
-        this.rank = rank;
+        this.file = nextFile;
+        this.rank = nextRank;
     }
 
     protected String decoratePrint(String str) {
         return "(" + str + ")";
     }
 
-    protected boolean validate(char file, char rank, Board board) {
-        return board.isEmpty(file, rank);
+    protected boolean validate(char prevFile, char prevRank, char nextFile, char nextRank, Board board) {
+        return board.isEmpty(prevFile, prevRank) == false && board.isEmpty(nextFile, nextRank);
     }
 }

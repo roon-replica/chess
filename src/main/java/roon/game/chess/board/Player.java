@@ -81,7 +81,7 @@ public class Player {
 
     public void move(Command command, Board board) {
         var piece = board.getPiece(command.getPrevFile(), command.getPrevRank());
-        piece.move(command.getNextFile(), command.getNextRank(), board);
+        piece.move(command.getPrevFile(), command.getPrevRank(), command.getNextFile(), command.getNextRank(), board);
 
         board.update(command.getPrevFile(), command.getPrevRank(), command.getNextFile(), command.getNextRank());
     }

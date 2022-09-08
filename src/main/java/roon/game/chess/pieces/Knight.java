@@ -21,9 +21,11 @@ public class Knight extends AbstractPiece {
         return decoratePrint(ret);
     }
 
+    private static int[][] canMoves = new int[][]{{-1, -2}, {-2, -1}, {-2, 1}, {-1, 2}, {1, 2}, {2, 1}, {2, -1}, {1, -2}};
+
     @Override
-    public void move(char nextFile, char nextRank, Board board) {
-        boolean canmove = this.validate(nextFile, nextRank, board); //todo:  this필요?
+    public void move(char prevFile, char prevRank, char nextFile, char nextRank, Board board) {
+        boolean canmove = this.validate(prevFile, prevRank, nextFile, nextRank, board);
         if (canmove == false) {
             System.out.println("can not move");
             return;
@@ -33,19 +35,17 @@ public class Knight extends AbstractPiece {
         this.rank = nextRank;
     }
 
-    private static int[][] canMoves = new int[][]{{-1, -2}, {-2, -1}, {-2, 1}, {-1, 2}, {1, 2}, {2, 1}, {2, -1}, {1, -2}};
-
     @Override
-    protected boolean validate(char nextFile, char nextRank, Board board) {
-        if (board.isEmpty(nextFile, nextRank) == false) {
+    protected boolean validate(char prevFile, char prevRank, char nextFile, char nextRank, Board board) {
+        if (board.isEmpty(prevFile, prevRank) || board.isEmpty(nextFile, nextRank) == false) {
             return false;
         }
 
-        for (var canMove : canMoves) {
-            char file = (char) (this.file + canMove[0]);
-            char rank = (char) (this.rank + canMove[1]);
+        for(var canMove : canMoves){
+            char file = (char)(this.file + canMove[0]);
+            char rank = (char)(this.rank + canMove[1]);
 
-            if (file == nextFile && rank == nextRank) {
+            if(file == nextFile && rank == nextRank){
                 return true;
             }
         }
