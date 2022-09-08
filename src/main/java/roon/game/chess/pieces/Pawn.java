@@ -6,7 +6,7 @@ import roon.game.chess.board.PieceColor;
 
 public class Pawn extends AbstractPiece{
 
-    private static int[][] canMoves = new int[][]{{0,-1},{-1,0},{0,1},{1,0}};
+    private static int[][] canMoves = new int[][]{{0,-1},{0,1}};
 
     @Builder
     public Pawn(PieceColor pieceColor, char file, char rank) {
