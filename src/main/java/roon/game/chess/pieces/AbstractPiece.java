@@ -2,6 +2,7 @@ package roon.game.chess.pieces;
 
 import lombok.Getter;
 import lombok.ToString;
+import roon.game.chess.board.Board;
 import roon.game.chess.board.PieceColor;
 
 @Getter
@@ -13,12 +14,22 @@ public abstract class AbstractPiece {
 
     int score;  // 기물 점수
 
-    public void move(char file, char rank) {
+    public void move(char file, char rank, Board board) {
+        validate(file, rank, board);
+
         this.file = file;
         this.rank = rank;
+
+
     }
 
     protected String decoratePrint(String str) {
         return "(" + str + ")";
+    }
+
+    protected void validate(char file, char rank, Board board) {
+        if (board.isEmpty(file, rank) == false) {
+            throw new IllegalStateException(file + " " + rank + " is not empty");
+        }
     }
 }

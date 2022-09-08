@@ -1,6 +1,7 @@
 package roon.game.chess.board;
 
 import lombok.Getter;
+import roon.game.chess.Command;
 import roon.game.chess.pieces.*;
 
 import java.util.ArrayList;
@@ -76,6 +77,13 @@ public class Player {
 
         return new ArrayList<>(pieces);
 
+    }
+
+    public void move(Command command, Board board) {
+        var piece = board.getPiece(command.getPrevFile(), command.getPrevRank());
+        piece.move(command.getNextFile(), command.getNextRank(), board);
+
+        board.update(command.getPrevFile(), command.getPrevRank(), command.getNextFile(), command.getNextRank());
     }
 
 
