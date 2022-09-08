@@ -1,6 +1,7 @@
 package roon.game.chess.board;
 
 import lombok.Getter;
+import roon.game.chess.Command;
 import roon.game.chess.pieces.*;
 
 import java.util.ArrayList;
@@ -55,27 +56,34 @@ public class Player {
 
     private List<AbstractPiece> initialBlackPieces() {
         var pieces = Arrays.asList(
-                King.builder().file('E').rank('8').pieceColor(PieceColor.WHITE).build(),
-                Queen.builder().file('D').rank('8').pieceColor(PieceColor.WHITE).build(),
-                Bishop.builder().file('C').rank('8').pieceColor(PieceColor.WHITE).build(),
-                Bishop.builder().file('F').rank('8').pieceColor(PieceColor.WHITE).build(),
-                Knight.builder().file('B').rank('8').pieceColor(PieceColor.WHITE).build(),
-                Knight.builder().file('G').rank('8').pieceColor(PieceColor.WHITE).build(),
-                Rook.builder().file('A').rank('8').pieceColor(PieceColor.WHITE).build(),
-                Rook.builder().file('H').rank('8').pieceColor(PieceColor.WHITE).build(),
+                King.builder().file('E').rank('8').pieceColor(PieceColor.BLACK).build(),
+                Queen.builder().file('D').rank('8').pieceColor(PieceColor.BLACK).build(),
+                Bishop.builder().file('C').rank('8').pieceColor(PieceColor.BLACK).build(),
+                Bishop.builder().file('F').rank('8').pieceColor(PieceColor.BLACK).build(),
+                Knight.builder().file('B').rank('8').pieceColor(PieceColor.BLACK).build(),
+                Knight.builder().file('G').rank('8').pieceColor(PieceColor.BLACK).build(),
+                Rook.builder().file('A').rank('8').pieceColor(PieceColor.BLACK).build(),
+                Rook.builder().file('H').rank('8').pieceColor(PieceColor.BLACK).build(),
 
-                Pawn.builder().file('E').rank('7').pieceColor(PieceColor.WHITE).build(),
-                Pawn.builder().file('D').rank('7').pieceColor(PieceColor.WHITE).build(),
-                Pawn.builder().file('C').rank('7').pieceColor(PieceColor.WHITE).build(),
-                Pawn.builder().file('F').rank('7').pieceColor(PieceColor.WHITE).build(),
-                Pawn.builder().file('B').rank('7').pieceColor(PieceColor.WHITE).build(),
-                Pawn.builder().file('G').rank('7').pieceColor(PieceColor.WHITE).build(),
-                Pawn.builder().file('A').rank('7').pieceColor(PieceColor.WHITE).build(),
-                Pawn.builder().file('H').rank('7').pieceColor(PieceColor.WHITE).build()
+                Pawn.builder().file('E').rank('7').pieceColor(PieceColor.BLACK).build(),
+                Pawn.builder().file('D').rank('7').pieceColor(PieceColor.BLACK).build(),
+                Pawn.builder().file('C').rank('7').pieceColor(PieceColor.BLACK).build(),
+                Pawn.builder().file('F').rank('7').pieceColor(PieceColor.BLACK).build(),
+                Pawn.builder().file('B').rank('7').pieceColor(PieceColor.BLACK).build(),
+                Pawn.builder().file('G').rank('7').pieceColor(PieceColor.BLACK).build(),
+                Pawn.builder().file('A').rank('7').pieceColor(PieceColor.BLACK).build(),
+                Pawn.builder().file('H').rank('7').pieceColor(PieceColor.BLACK).build()
         );
 
         return new ArrayList<>(pieces);
 
+    }
+
+    public void move(Command command, Board board) {
+        var piece = board.getPiece(command.getPrevFile(), command.getPrevRank());
+        piece.move(command.getPrevFile(), command.getPrevRank(), command.getNextFile(), command.getNextRank(), board);
+
+        board.update(command.getPrevFile(), command.getPrevRank(), command.getNextFile(), command.getNextRank());
     }
 
 

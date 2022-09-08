@@ -2,6 +2,7 @@ package roon.game.chess.board;
 
 import roon.game.chess.pieces.AbstractPiece;
 import roon.game.chess.pieces.Empty;
+import roon.game.chess.pieces.Symbol;
 
 public class Board {
     private final char FILE_MAX = 'h';
@@ -17,10 +18,11 @@ public class Board {
     private Player whitePlayer;
     private Player blackPlayer;
 
-    public Board() {
+    public Board(Player whitePlayer, Player blackPlayer) {
         board = new AbstractPiece[SIZE][SIZE];
-        this.whitePlayer = new Player(PieceColor.WHITE);
-        this.blackPlayer = new Player(PieceColor.BLACK);
+
+        this.whitePlayer = whitePlayer;
+        this.blackPlayer = blackPlayer;
     }
 
     private void writeBoard() {
@@ -48,7 +50,7 @@ public class Board {
 
     public void printBoard() {
         writeBoard();
-        for (int r = 0; r < SIZE; r++) {
+        for (int r = SIZE-1; r>=0; r--) {
             for (int c = 0; c < SIZE; c++) {
                 System.out.print(board[r][c] + " ");
             }
@@ -56,5 +58,21 @@ public class Board {
         }
     }
 
+    public boolean isEmpty(char file, char rank) {
+        var toMove = board[rank - '1'][file - 'A'];
+        return toMove.getSymbol().equals(Symbol.E);
+    }
+
+    public AbstractPiece getPiece(char file, char rank) {
+        return board[rank - '1'][file - 'A'];
+    }
+
+    public void update(char prevFile, char prevRank, char nextFile, char nextRank) {
+        var prev = board[prevRank - '1'][prevFile - 'A'];
+//        var next = board[nextRank - '1'][nextFile - 'A'];
+
+        board[nextRank - '1'][nextFile - 'A'] = prev;
+        board[prevRank - '1'][prevFile - 'A'] = Empty.builder().file(prevFile).rank(prevRank).build();
+    }
 
 }
