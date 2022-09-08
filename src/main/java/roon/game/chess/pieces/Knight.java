@@ -10,7 +10,7 @@ public class Knight extends AbstractPiece{
         this.pieceColor = pieceColor;
         this.file = file;
         this.rank = rank;
-        this.symbol = Symbol.K;
+        this.symbol = Symbol.N;
         this.score = 3;
     }
 

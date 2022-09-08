@@ -1,9 +1,12 @@
 package roon.game.chess.pieces;
 
 import lombok.Builder;
+import roon.game.chess.board.Board;
 import roon.game.chess.board.PieceColor;
 
 public class King extends AbstractPiece{
+
+    private static int[][] canMoves = new int[][]{{0,-1},{-1,0},{0,1},{1,0}};
 
     @Builder
     public King(PieceColor pieceColor, char file, char rank) {

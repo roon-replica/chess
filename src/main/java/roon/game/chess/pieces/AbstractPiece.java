@@ -15,21 +15,23 @@ public abstract class AbstractPiece {
     int score;  // 기물 점수
 
     public void move(char file, char rank, Board board) {
-        validate(file, rank, board);
+        //validate(file, rank, board);
+        boolean canmove = this.validate(file, rank, board);
+
+        if(canmove == false){
+            System.out.println("can not move");
+            return;
+        }
 
         this.file = file;
         this.rank = rank;
-
-
     }
 
     protected String decoratePrint(String str) {
         return "(" + str + ")";
     }
 
-    protected void validate(char file, char rank, Board board) {
-        if (board.isEmpty(file, rank) == false) {
-            throw new IllegalStateException(file + " " + rank + " is not empty");
-        }
+    protected boolean validate(char file, char rank, Board board) {
+        return board.isEmpty(file, rank);
     }
 }

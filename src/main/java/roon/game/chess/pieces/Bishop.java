@@ -10,7 +10,7 @@ public class Bishop extends AbstractPiece {
         this.pieceColor = pieceColor;
         this.file = file;
         this.rank = rank;
-        this.symbol = Symbol.K;
+        this.symbol = Symbol.B;
         this.score = 3;
     }
 
